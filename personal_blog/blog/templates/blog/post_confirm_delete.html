@@ -1,0 +1,17 @@
+<!-- Header for the delete confirmation page -->
+<h1>Confirm Delete</h1>
+
+<!-- Message asking the user to confirm deletion of the post -->
+<p>Are you sure you want to delete "{{ post.title }}"?</p>
+
+<!-- Form to handle the deletion request -->
+<form method="post">
+    <!-- CSRF token for security to prevent cross-site request forgery -->
+    {% csrf_token %}
+
+    <!-- Button to submit the form and confirm deletion -->
+    <button type="submit">Yes, Delete</button>
+
+    <!-- Link to cancel the deletion and return to the post detail page -->
+    <a href="{% url 'post_detail' post.slug %}">Cancel</a>
+</form>

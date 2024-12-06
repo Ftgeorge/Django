@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Character encoding for the document -->
+    <meta charset="UTF-8">
+    <!-- Viewport settings for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the page displayed in the browser tab -->
+    <title>Edit Post</title>
+    <style>
+        /* Basic styling for the body */
+        body {
+            font-family: Arial, sans-serif;
+            /* Font style */
+            background-color: #f4f4f9;
+            /* Light background color */
+            margin: 0;
+            /* Remove default margin */
+            padding: 0;
+            /* Remove default padding */
+        }
+
+        /* Styling for the main heading */
+        h1 {
+            text-align: center;
+            /* Center the text */
+            color: #333;
+            /* Dark gray color */
+            margin-top: 20px;
+            /* Space above the heading */
+        }
+
+        /* Styling for the form container */
+        form {
+            max-width: 600px;
+            /* Maximum width of the form */
+            margin: 20px auto;
+            /* Center the form with margin */
+            background-color: #fff;
+            /* White background for the form */
+            padding: 20px;
+            /* Padding inside the form */
+            border-radius: 8px;
+            /* Rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow effect */
+        }
+
+        /* Styling for labels */
+        label {
+            font-weight: bold;
+            /* Bold text for labels */
+            color: #555;
+            /* Medium gray color */
+        }
+
+        /* Styling for text input and textarea */
+        input[type="text"],
+        textarea {
+            width: 100%;
+            /* Full width */
+            padding: 10px;
+            /* Padding inside the input/textarea */
+            margin: 10px 0 20px;
+            /* Margin around the input/textarea */
+            border: 1px solid #ddd;
+            /* Light gray border */
+            border-radius: 5px;
+            /* Rounded corners */
+            font-size: 16px;
+            /* Font size */
+            color: #333;
+            /* Dark gray text color */
+        }
+
+        /* Focus effect for text input and textarea */
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: #8B4513;
+            /* Dark brown border on focus */
+            outline: none;
+            /* Remove default outline */
+        }
+
+        /* Styling for the submit button */
+        button {
+            display: block;
+            /* Block display for full width */
+            width: 100%;
+            /* Full width */
+            padding: 10px;
+            /* Padding inside the button */
+            background-color: #8B4513;
+            /* Dark brown background color */
+            color: #fff;
+            /* White text color */
+            border: none;
+            /* No border */
+            border-radius: 5px;
+            /* Rounded corners */
+            font-size: 16px;
+            /* Font size */
+            cursor: pointer;
+            /* Pointer cursor on hover */
+            transition: background-color 0.3s ease;
+            /* Smooth background color transition */
+        }
+
+        /* Hover effect for the submit button */
+        button:hover {
+            background-color: #733b10;
+            /* Darker brown on hover */
+        }
+
+        /* Active effect for the submit button */
+        button:active {
+            background-color: #592f0c;
+            /* Even darker brown when clicked */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main heading for the page -->
+    <h1>Edit Post</h1>
+    <!-- Form to edit the post -->
+    <form method="POST">
+        <!-- CSRF token for security to prevent cross-site request forgery -->
+        {% csrf_token %}
+
+        <!-- Label and input field for the post title -->
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" value="{{ post.title }}" required><br><br>
+
+        <!-- Label and textarea for the post content -->
+        <label for="content">Content:</label><br>
+        <textarea id="content" name="content" rows="10" required>{{ post.content }}</textarea><br><br>
+
+        <!-- Button to submit the form and save changes -->
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+
+</html>

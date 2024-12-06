@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Character encoding for the document -->
+    <meta charset="UTF-8">
+    <!-- Viewport settings for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the page displayed in the browser tab -->
+    <title>Blog Posts</title>
+    <style>
+        /* General styling for the body */
+        body {
+            font-family: Arial, sans-serif;
+            /* Font style */
+            margin: 0;
+            /* Remove default margin */
+            padding: 0;
+            /* Remove default padding */
+            background-color: #f5f5f5;
+            /* Light gray background color */
+            color: #333;
+            /* Dark gray text color */
+        }
+
+        /* Container styling for the main content */
+        .container {
+            width: 80%;
+            /* Width of the container */
+            margin: 20px auto;
+            /* Center the container with margin */
+            padding: 20px;
+            /* Padding inside the container */
+            background-color: #fff;
+            /* White background for the container */
+            border-radius: 8px;
+            /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow effect */
+        }
+
+        /* Header styling for the main title */
+        h1 {
+            text-align: center;
+            /* Center the heading text */
+            color: #444;
+            /* Dark gray color for the heading */
+        }
+
+        /* Link styling for buttons */
+        a {
+            display: inline-block;
+            /* Display links as block elements */
+            padding: 10px 20px;
+            /* Padding inside the link */
+            margin: 10px 0;
+            /* Margin around the link */
+            background-color: #8B4513;
+            /* Blue background color */
+            color: #fff;
+            /* White text color */
+            text-decoration: none;
+            /* Remove underline from links */
+            border-radius: 4px;
+            /* Rounded corners */
+            font-weight: bold;
+            /* Bold text */
+        }
+
+        /* Hover effect for links */
+        a:hover {
+            background-color: #8B4513;
+            /* Darker blue on hover */
+        }
+
+        /* Post styling for individual blog posts */
+        .post {
+            margin-bottom: 20px;
+            /* Space below each post */
+            padding: 10px;
+            /* Padding inside the post */
+            border-left: 4px solid #8B4513;
+            /* Blue left border */
+            background-color: #f9f9f9;
+            /* Light background color for posts */
+        }
+
+        /* Styling for post titles */
+        .post h2 {
+            margin: 0;
+            /* Remove default margin */
+            color: #333;
+            /* Dark gray color for titles */
+        }
+
+        /* Paragraph styling within posts */
+        .post p {
+            margin: 5px 0;
+            /* Space above and below paragraphs */
+        }
+
+        /* Strong text styling within posts */
+        .post strong {
+            color: #555;
+            /* Medium gray color for strong text */
+        }
+
+        /* Horizontal rule styling */
+        hr {
+            border: none;
+            /* Remove default border */
+            border-top: 1px solid #ddd;
+            /* Light gray top border */
+            margin: 20px 0;
+            /* Space above and below the horizontal rule */
+        }
+
+        /* Styling for the message when no posts are available */
+        .no-posts {
+            text-align: center;
+            /* Center the text */
+            font-size: 18px;
+            /* Font size for the message */
+            color: #666;
+            /* Medium gray color */
+        }
+
+        /* Link styling within the no posts message */
+        .no-posts a {
+            color: #8B4513;
+            /* Blue color for the link */
+            text-decoration: underline;
+            /* Underline the link */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main container for the blog posts -->
+    <div class="container">
+        <!-- Main heading for the blog -->
+        <h1>Personal Blog</h1>
+
+        <!-- Link to create a new post -->
+        <a href="{% url 'post_new' %}">Create New Post</a>
+        <hr>
+
+        <!-- Loop through each post in the posts list -->
+        {% for post in posts %}
+        <div>
+            <!-- Display the title of the post -->
+            <h2>{{ post.title }}</h2>
+            <!-- Display the creation date of the post -->
+            <p><strong>Created on:</strong> {{ post.created_at }}</p>
+            <!-- Display the content of the post -->
+            <p>{{ post.content }}</p>
+            <!-- Links to edit and delete the post -->
+            <a href="{% url 'post_edit' post.id %}">Edit</a> |
+            <a href="{% url 'post_delete' post.id %}">Delete</a>
+        </div>
+        <hr>
+        {% empty %}
+        <!-- Message displayed when there are no posts -->
+        <p>No blog posts available. <a href="{% url 'post_new' %}">Create one!</a></p>
+        {% endfor %}
+
+    </div>
+</body>
+
+</html>

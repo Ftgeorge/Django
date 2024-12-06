@@ -1,0 +1,17 @@
+<!-- Main heading displaying the title of the post -->
+<h1>{{ post.title }}</h1>
+
+<!-- Paragraph displaying the content of the post -->
+<p>{{ post.content }}</p>
+
+<!-- Small text displaying the author and the creation date of the post -->
+<p><small>by {{ post.author }} on {{ post.created_at }}</small></p>
+
+<!-- Link to edit the post, using the post's slug for the URL -->
+<a href="{% url 'post_edit' post.slug %}">Edit</a> |
+
+<!-- Link to delete the post, using the post's slug for the URL -->
+<a href="{% url 'post_delete' post.slug %}">Delete</a> |
+
+<!-- Link to navigate back to the list of blog posts -->
+<a href="{% url 'post_list' %}">Back to Blog</a>
