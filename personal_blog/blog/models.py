@@ -7,8 +7,8 @@ from django.utils.text import slugify  # Importing slugify to create slugs from 
 import uuid  # Importing uuid to generate unique identifiers
 
 
-# Defining the Post model
-class Post(models.Model):
+# Base Class: BasePost
+class BasePost(models.Model):
     # Title of the post, with a maximum length of 200 characters
     title = models.CharField(max_length=200)
 
@@ -32,3 +32,30 @@ class Post(models.Model):
             self.slug = slugify(self.title) + "-" + str(uuid.uuid4())[:8]
         # Call the superclass's save method to save the instance
         super().save(*args, **kwargs)
+
+    # Polymorphic method: Can be overridden by subclasses
+    def display_summary(self):
+        return f"{self.title} - {self.content[:50]}..."
+
+    class Meta:
+        abstract = True  # This makes BasePost an abstract class (not instantiated directly)
+
+
+# Subclass: Post
+class Post(BasePost):
+    # Additional field specific to the Post class
+    is_published = models.BooleanField(default=False)
+
+    # Overriding the display_summary method for polymorphism
+    def display_summary(self):
+        return f"Published: {self.is_published} - {self.title} - {self.content[:50]}..."
+
+
+# Subclass: DraftPost
+class DraftPost(BasePost):
+    # Additional field specific to the DraftPost class
+    draft_notes = models.TextField(blank=True, null=True)
+
+    # Overriding the display_summary method for polymorphism
+    def display_summary(self):
+        return f"Draft Notes: {self.draft_notes} - {self.title} - {self.content[:50]}..."
